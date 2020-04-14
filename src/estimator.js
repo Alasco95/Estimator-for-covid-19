@@ -1,37 +1,19 @@
 const covid19ImpactEstimator = () => data => {
-    const {
-        reportedCases,
-        timeToElasped,
-        periodType    } = data; 
-
     const impact = {};
     const severeImpact = {};
 
-    //Challenge 1
-    impact.currentlyInfected = Math.trunc(reportedCases * 10);
-    severeImpact.currentlyInfected = Math.trunc(reportedCases * 50);
-
-    //check time elasped in days, weeks or months
-
-    let timeFactor;
-
-    switch (periodType.trim().toLowerCase()) {
-        case 'months':
-         timeFactor = Math.trunc((timeToElasped * 30) / 3);
-         break;
-            case 'weeks':
-           timeFactor = Math.trunc((timeToElasped * 7) / 3);
-            break;
-          case 'days':
-          timeFactor = Math.trunc((timeToElasped) / 3);
-             break;
-         default:
-    }
+    const input = data;
+    impact.currentlyInfected = input.reportedCases * 10;
+    severeImpact.currentlyInfected = input.reportedCases * 50;
+    impact.infectionByRequestedTime = impact.currentlyInfected * (2**9);
+    severeImpact.infectionByRequestedTime = severeImpact.currentlyInfected * (2 ** 9);
+    return {  
+      data: {},          // the input data you got   
+       impact: {},        // your best case estimation   
+         severeImpact: {}   // your severe case estimation
+         } ;
 
 
-impact.infectionByRequestedTime = impact.currentlyInfected * (2 ** timeFactor);
-severeImpact.infectionByRequestedTime = severeImpact.currentlyInfected * (2 ** timeFactor);
-
-}
-
+};
+ 
 export default covid19ImpactEstimator;
