@@ -1,13 +1,8 @@
-const covid19ImpactEstimator = (data) => data => {
+const covid19ImpactEstimator = () => data => {
     const {
-        region: {
-            avgDailyIncomeInUd
-        },
         reportedCases,
         timeToElasped,
-        periodType,
-        totalHospitalBeds
-    } = data; 
+        periodType    } = data; 
 
     const impact = {};
     const severeImpact = {};
@@ -22,18 +17,15 @@ const covid19ImpactEstimator = (data) => data => {
 
     switch (periodType.trim().toLowerCase()) {
         case 'months':
-            timeFactor = Math.trunc((timeToElasped * 30) / 3);
-            break;
+         timeFactor = Math.trunc((timeToElasped * 30) / 3);
+         break;
             case 'weeks':
-                timeFactor = Math.trunc((timeToElasped * 7) / 3);
+           timeFactor = Math.trunc((timeToElasped * 7) / 3);
             break;
-              case 'days':
-                timeFactor = Math.trunc((timeToElasped) / 3);
-                 break;
-                 default:
-
-
-
+          case 'days':
+          timeFactor = Math.trunc((timeToElasped) / 3);
+             break;
+         default:
     }
 
 
